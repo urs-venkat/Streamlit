@@ -7,44 +7,57 @@ import os
 load_dotenv()
 
 def show():
-    st.title("📝 Grammar Corrector")
+    st.markdown("<h1 style='text-align: center;'>✍️ Grammar Corrector</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center;'>Enter your text below to correct grammar and spelling mistakes instantly.</p>", unsafe_allow_html=True)
+    st.markdown("<hr>", unsafe_allow_html=True)
 
     # Initialize session state
     if "grammar_history" not in st.session_state:
         st.session_state.grammar_history = []
 
-    user_text = st.text_area("Enter your sentence or paragraph:", height=200)
+    col1, col2 = st.columns(2)
 
-    if st.button("Correct Grammar"):
+    with col1:
+        st.subheader("Your Text")
+        user_text = st.text_area("Enter your sentence or paragraph:", height=300, label_visibility="collapsed")
+
+    with col2:
+        st.subheader("Corrected Text")
+        if "corrected_text" in st.session_state:
+            st.text_area("Output", value=st.session_state.corrected_text, height=300, key="output_text", label_visibility="collapsed")
+        else:
+            st.text_area("Output", value="Your corrected text will appear here...", height=300, key="output_text", label_visibility="collapsed")
+
+    if st.button("✨ Correct Grammar"):
         if user_text.strip() == "":
             st.warning("Please enter some text.")
-            return
+        else:
+            prompt = f"Correct the grammar in the following text:\n\n{user_text}\n\nCorrected version:"
+            api_key = os.getenv("OPENAI_API_KEY")
+            if not api_key:
+                st.error("OpenAI API key not found. Please set it in the .env file.")
+            else:
+                with st.spinner("✍️ Correcting..."):
+                    try:
+                        llm = OpenAI(openai_api_key=api_key)
+                        corrected_text = llm.invoke(prompt)
+                        st.session_state.corrected_text = corrected_text
+                        st.session_state.grammar_history.append((user_text, corrected_text))
+                        st.experimental_rerun()
+                    except Exception as e:
+                        st.error(f"An error occurred: {e}")
 
-        prompt = f"Correct the grammar in the following text:\n\n{user_text}\n\nCorrected version:"
-
-        # Get API key from environment
-        api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            st.error("OpenAI API key not found. Please set it in the .env file.")
-            return
-
-        llm = OpenAI(openai_api_key=api_key)
-        corrected_text = llm.invoke(prompt)
-
-        # Store in history
-        st.session_state.grammar_history.append((user_text, corrected_text))
-
-        st.success("✅ Corrected Text:")
-        st.text_area("Output", corrected_text, height=200)
-
-    # Show history
+    # --- History Section ---
     if st.session_state.grammar_history:
-        st.markdown("---")
+        st.markdown("<hr>", unsafe_allow_html=True)
         st.subheader("📜 History")
-        for i, (original, corrected) in enumerate(reversed(st.session_state.grammar_history), 1):
-            with st.expander(f"Entry {i}"):
-                st.markdown(f"**Original:**\n{original}")
-                st.markdown(f"**Corrected:**\n{corrected}")
+        if st.button("🗑️ Clear History"):
+            st.session_state.grammar_history = []
+            if "corrected_text" in st.session_state:
+                del st.session_state.corrected_text
+            st.experimental_rerun()
 
-    if st.button("🗑 Clear History"):
-        st.session_state.grammar_history = []
+        for i, (original, corrected) in enumerate(reversed(st.session_state.grammar_history)):
+            with st.expander(f"**{i+1}. Original:** {original[:50]}..."):
+                st.markdown(f"**Original:**\n\n> {original}")
+                st.markdown(f"**Corrected:**\n\n> {corrected}")

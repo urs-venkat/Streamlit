@@ -1,0 +1,10 @@
+streamlit
+streamlit-option-menu
+python-dotenv
+pandas
+langchain-experimental
+langchain-community
+openai
+openpyxl
+PyPDF2
+python-docx
