@@ -20,7 +20,7 @@ if "qa_history" not in st.session_state:
 if "grammar_history" not in st.session_state:
     st.session_state.grammar_history = []
 
-# 🎨 Enhanced Background + Glass Sidebar Styling
+# 🎨 Enhanced Background + Dark Glass Sidebar Styling
 def set_enhanced_background(image_url):
     st.markdown(
         f"""
@@ -32,47 +32,47 @@ def set_enhanced_background(image_url):
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: white;
+            color: white; /* Keep general text white for contrast */
             font-family: 'Poppins', sans-serif;
         }}
 
         section[data-testid="stSidebar"] {{
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.3); /* Darker transparent background */
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            border-right: 1px solid rgba(255, 255, 255, 0.1); /* Slightly more subtle border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Darker, slightly more prominent shadow */
         }}
 
         section[data-testid="stSidebar"] * {{
             color: white !important;
         }}
 
-        /* Enhanced glass containers */
+        /* Enhanced dark glass containers */
         .glass-container {{
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(30, 30, 30, 0.6); /* Darker transparent background */
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(70, 70, 70, 0.4); /* Darker border */
             border-radius: 20px;
             padding: 30px;
             margin: 20px 0;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4); /* Darker shadow */
             transition: all 0.3s ease;
         }}
 
         .glass-container:hover {{
             transform: translateY(-5px);
-            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
-            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5); /* Even darker shadow on hover */
+            border-color: rgba(90, 90, 90, 0.5); /* Darker border on hover */
         }}
 
-        /* Enhanced cards */
+        /* Enhanced dark cards */
         .feature-card {{
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.6), rgba(40, 40, 40, 0.5)); /* Darker gradient */
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(70, 70, 70, 0.4); /* Darker border */
             border-radius: 20px;
             padding: 30px;
             margin: 15px 0;
@@ -89,7 +89,7 @@ def set_enhanced_background(image_url):
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent); /* Subtle white shine */
             transition: left 0.5s;
         }}
 
@@ -99,30 +99,30 @@ def set_enhanced_background(image_url):
 
         .feature-card:hover {{
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(255, 75, 75, 0.2);
-            border-color: rgba(255, 75, 75, 0.5);
+            box-shadow: 0 20px 50px rgba(255, 75, 75, 0.3); /* Slightly stronger red shadow on hover */
+            border-color: rgba(255, 75, 75, 0.6); /* More prominent red border on hover */
         }}
 
         .feature-card h3 {{
-            color: #FF4B4B;
+            color: #FF4B4B; /* Keep accent color vibrant */
             font-weight: 600;
             margin-bottom: 15px;
             font-size: 1.4rem;
         }}
 
         .feature-card p {{
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.9); /* Keep text light for readability */
             font-size: 1rem;
             line-height: 1.6;
         }}
 
-        /* Enhanced input fields */
+        /* Enhanced dark input fields */
         .stTextInput input,
         .stTextArea textarea,
         .stSelectbox select {{
-            background: rgba(255, 255, 255, 0.1) !important;
-            color: white !important;
-            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            background: rgba(0, 0, 0, 0.2) !important; /* Darker transparent background */
+            color: white !important; /* Keep text white */
+            border: 1px solid rgba(70, 70, 70, 0.4) !important; /* Darker border */
             border-radius: 10px !important;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -131,8 +131,8 @@ def set_enhanced_background(image_url):
         .stTextInput input:focus,
         .stTextArea textarea:focus,
         .stSelectbox select:focus {{
-            border-color: #FF4B4B !important;
-            box-shadow: 0 0 20px rgba(255, 75, 75, 0.3) !important;
+            border-color: #FF4B4B !important; /* Accent color on focus */
+            box-shadow: 0 0 20px rgba(255, 75, 75, 0.4) !important; /* Accent shadow on focus */
         }}
 
         /* Enhanced buttons */
@@ -150,10 +150,10 @@ def set_enhanced_background(image_url):
 
         .stButton > button:hover {{
             transform: translateY(-2px) !important;
-            box-shadow: 0 8px 25px rgba(255, 75, 75, 0.4) !important;
+            box-shadow: 0 8px 25px rgba(255, 75, 75, 0.5) !important; /* Stronger accent shadow on hover */
         }}
 
-        /* Enhanced titles */
+        /* Enhanced titles (already good with gradient) */
         .main-title {{
             font-size: 3.5rem;
             font-weight: 700;
@@ -163,23 +163,23 @@ def set_enhanced_background(image_url):
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 10px;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Darker text shadow */
         }}
 
         .sub-title {{
             font-size: 1.3rem;
             font-weight: 400;
             text-align: center;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.8); /* Slightly darker white for sub-title */
             margin-bottom: 40px;
         }}
 
         /* Welcome section */
         .welcome-section {{
-            background: linear-gradient(135deg, rgba(255, 75, 75, 0.15), rgba(255, 255, 255, 0.05));
+            background: linear-gradient(135deg, rgba(255, 75, 75, 0.1), rgba(0, 0, 0, 0.4)); /* Blend accent with dark transparent */
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(70, 70, 70, 0.4); /* Darker border */
             border-radius: 20px;
             padding: 30px;
             margin: 30px 0;
@@ -189,16 +189,16 @@ def set_enhanced_background(image_url):
         .welcome-name {{
             font-size: 1.4rem;
             font-weight: 600;
-            color: #FF4B4B;
+            color: #FF4B4B; /* Keep accent vibrant */
             margin-top: 15px;
         }}
 
         /* Feature list */
         .feature-list {{
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.3); /* Darker transparent background */
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(70, 70, 70, 0.4); /* Darker border */
             border-radius: 15px;
             padding: 25px;
             margin: 20px 0;
@@ -211,13 +211,13 @@ def set_enhanced_background(image_url):
 
         .feature-list li {{
             padding: 15px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* More subtle separator */
             font-size: 1.1rem;
             transition: all 0.3s ease;
         }}
 
         .feature-list li:hover {{
-            color: #FF4B4B;
+            color: #FF4B4B; /* Accent color on hover */
             transform: translateX(10px);
         }}
 
@@ -225,7 +225,7 @@ def set_enhanced_background(image_url):
             border-bottom: none;
         }}
 
-        /* Animation keyframes */
+        /* Animation keyframes (no change needed) */
         @keyframes fadeInUp {{
             from {{
                 opacity: 0;
@@ -256,7 +256,7 @@ def set_enhanced_background(image_url):
             animation: slideInLeft 0.8s ease-out;
         }}
 
-        /* Responsive design */
+        /* Responsive design (no change needed) */
         @media (max-width: 768px) {{
             .main-title {{
                 font-size: 2.5rem;
