@@ -8,3 +8,4 @@ openai
 openpyxl
 PyPDF2
 python-docx
+tabulate
